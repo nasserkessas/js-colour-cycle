@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charSet="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Rainbow</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+
+<body>
+    <script>
+        let backwards
+        let newColour;
+        let colour;
+        let i = 0;
+        let end;
+        let speed = 5;
+        function changeColour(finalColour, backwards) {
+            switch (finalColour) {
+                case ("yellow"): newColour = `rgb(255,${i},0)`;
+                    break;
+                case ("aqua"): newColour = `rgb(0, 255, ${i})`;
+                    break;
+                case ("purple"): newColour = `rgb(${i}, 0, 255)`;
+                    break;
+                case ("green"): newColour = `rgb(${i}, 255, 0)`;
+                    break;
+                case ("blue"): newColour = `rgb(0, ${i}, 255)`;
+                    break;
+                case ("red"): newColour = `rgb(255, 0, ${i})`;
+                    break;
+            }
+
+            if (backwards === true) {
+                if (i !== -1) {
+                    colour = newColour;
+                    document.body.style.backgroundColor = colour;
+                    i--;
+                }
+            }
+            else {
+                if (i !== 256) {
+                    colour = newColour;
+                    document.body.style.backgroundColor = colour;
+                    i++;
+                }
+            }
+        }
+
+        function toYellow() {
+            try { clearInterval(interval) } catch{ }
+            i = 0;
+            interval = setInterval(changeColour, speed, "yellow", false)
+        } function toGreen() {
+            clearInterval(interval)
+            i = 255;
+            interval = setInterval(changeColour, speed, "green", true)
+        } function toAqua() {
+            clearInterval(interval)
+            i = 0;
+            interval = setInterval(changeColour, speed, "aqua", false)
+        } function toBlue() {
+            clearInterval(interval)
+            i = 255;
+            interval = setInterval(changeColour, speed, "blue", true)
+        } function toPurple() {
+            clearInterval(interval)
+            i = 0;
+            interval = setInterval(changeColour, speed, "purple", false)
+        } function toRed() {
+            clearInterval(interval)
+            i = 255;
+            interval = setInterval(changeColour, speed, "red", true)
+        }
+        function cycle() {
+            setTimeout(toYellow, 0)
+            setTimeout(toGreen, 255 * speed)
+            setTimeout(toAqua, 255 * speed * 2)
+            setTimeout(toBlue, 255 * speed * 3)
+            setTimeout(toPurple, 255 * speed * 4)
+            setTimeout(toRed, 255 * speed * 5)
+        }
+
+        cycle()
+        setInterval(cycle, 255 * speed * 6)
+
+    </script>
+</body>
+<!-- 
+    255 0 0 up red
+    255 255 0 down yellow
+    0 255 0 up green
+    0 255 255 down aqua
+    0 0 255 up blue
+    255 0 255 down purple
+    255 0 0 red
+ -->
+
+</html>
